@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="logo-container">
+    <ion-img src="assets/logo.png"></ion-img>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input formControlName="username"></ion-input>
+      <div class="form-errors" *ngIf="hasError('username', 'required')">
+        <ion-text color="danger">Username is required</ion-text>
+      </div>
+      <div class="form-errors" *ngIf="hasError('username', 'minlength')">
+        <ion-text color="danger"
+          >Username mininum length is 6 characters</ion-text
+        >
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <div class="form-errors" *ngIf="hasError('password', 'required')">
+        <ion-text color="danger">Password is required</ion-text>
+      </div>
+      <div class="form-errors" *ngIf="hasError('password', 'minlength')">
+        <ion-text color="danger"
+          >Password mininum length is 8 characters</ion-text
+        >
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirm password</ion-label>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+      <div class="form-errors" *ngIf="hasError('confirmPassword', 'required')">
+        <ion-text color="danger">Confirm password is required</ion-text>
+      </div>
+      <div
+        class="form-errors"
+        *ngIf="hasError('confirmPassword', 'NoPassswordMatch')"
+      >
+        <ion-text color="danger">Passwords don't match</ion-text>
+      </div>
+    </ion-item>
+    <ion-button class="submit-button" expand="block" type="submit"
+      >Create account</ion-button
+    ><ion-button
+      class="submit-button"
+      expand="block"
+      type="button"
+      color="danger"
+      (click)="goToLogin()"
+      >Cancel</ion-button
+    >
+  </form>
+</ion-content>

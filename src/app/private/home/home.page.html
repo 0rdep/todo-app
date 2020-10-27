@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>99 Tasks</ion-title>
+    <ion-button slot="end" fill="clear" (click)="logout()">
+      <ion-icon name="log-out" color="danger"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.--ion-background-color]="color" class="ion-padding" #content>
+  <ion-avatar (click)="changeAvatar()">
+    <img [src]="profileUrl" />
+  </ion-avatar>
+  <ion-text color="light">
+    <h2>Hello, <span class="ion-text-capitlize">{{username}}</span>.</h2>
+  </ion-text>
+  <ion-text color="light">
+    <p>Looks like feel good.</p>
+  </ion-text>
+  <ion-text color="light">
+    <p>
+      You have <ion-text color="light">{{getTodayTotalTasks()}}</ion-text> tasks
+      to do today.
+    </p>
+  </ion-text>
+  <ion-text color="light"> Today: {{today | date}} </ion-text>
+  <ion-slides
+    [options]="slideOpt"
+    #slider
+    (ionSlideDidChange)="slideChanged()"
+    style="padding: 16px"
+  >
+    <ion-slide *ngFor="let category of categories">
+      <ion-card padding (click)="openTodo()" style="height: 300px">
+        <ion-card-header>
+          <ion-card-title>
+            <div class="ion-text-start">
+              <ion-icon
+                [name]="getIconForCategory(category)"
+                [style.color]="color"
+                class="icon"
+              ></ion-icon>
+            </div>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content> </ion-card-content>
+        <div class="bottom">
+          <div class="ion-text-start">
+            <ion-text color="medium"
+              >{{getTasksDoneForCategory(category)}}/{{getTasksForCategory(category)}}
+              tasks</ion-text
+            >
+          </div>
+          <div class="ion-text-start">
+            <ion-text class="text ion-text-capitalize"
+              ><h2>{{category}}</h2>
+            </ion-text>
+          </div>
+          <ion-progress-bar
+            color="primary"
+            [value]="getPercentageCategory(category)"
+          ></ion-progress-bar>
+        </div>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

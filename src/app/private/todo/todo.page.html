@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div>
+      <ion-icon [name]="categoryIcon" [style.color]="color" class="icon"></ion-icon>
+      <ion-text class="text ion-text-capitalize">{{categoryName}}</ion-text>
+    </div>
+    <br />
+    <div>
+      <ion-text color="medium"
+        >{{todayTasksDoneCount}}/{{todayTasksCount}} tasks</ion-text
+      >
+      <ion-progress-bar [style.--progress-background]="color" [value]="getPercentageCategory()"></ion-progress-bar>
+    </div>
+
+    <ion-list>
+      <div *ngFor="let todoDay of todosByDayKeys">
+        <ion-list-header>
+          <ion-text>{{getDate(todoDay)}}</ion-text>
+        </ion-list-header>
+        <ion-item *ngFor="let todo of todosByDay[todoDay]">
+          <ion-checkbox
+            [checked]="todo.done"
+            [disabled]="todo.done"
+            (ionChange)="markDone(todo)"
+            slot="start"
+          ></ion-checkbox>
+          <ion-text>{{todo.name}}</ion-text>
+          <ion-button fill="clear" (click)="update(todo)" slot="end">
+            <ion-icon name="pencil"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="delete(todo)" color="danger" slot="end">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+    </ion-list>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="gotoCreatePage()"
+      ><ion-icon name="add"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
+</ion-content>

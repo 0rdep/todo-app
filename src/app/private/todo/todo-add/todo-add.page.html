@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Todo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="padding: 16px">
+  <ion-card>
+    <ion-card-content>
+      <div class="container">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <ion-item>
+            <ion-label position="stacked">Todo Name</ion-label>
+            <ion-input formControlName="name"></ion-input>
+            <div class="form-errors" *ngIf="hasError('name', 'required')">
+              <ion-text color="danger">Name is required</ion-text>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Todo Date</ion-label>
+            <ion-datetime
+              displayFormat="YYYY/MM/DD HH:mm"
+              placeholder="Select Date"
+              formControlName="date"
+              [min]="minDate"
+            ></ion-datetime>
+            <div class="form-errors" *ngIf="hasError('date', 'required')">
+              <ion-text color="danger">Date is required</ion-text>
+            </div>
+          </ion-item>
+        </form>
+      </div>
+    </ion-card-content>
+    <div class="cardfooter" style="padding: 16px">
+      <ion-button
+        expand="block"
+        (click)="submit()"
+        [disabled]="(form.touched || form.dirty) && !form.valid"
+        color="success"
+        >Create</ion-button
+      >
+      <ion-button
+        expand="block"
+        color="danger"
+        fill="outline"
+        (click)="navigateBack()"
+        >Cancel
+      </ion-button>
+    </div>
+  </ion-card>
+</ion-content>

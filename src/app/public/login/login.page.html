@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <div class="logo-container">
+    <ion-img src="assets/logo.png"></ion-img>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input formControlName="username"></ion-input>
+      <div class="form-errors" *ngIf="hasError('username', 'required')">
+        <ion-text color="danger">Username is required</ion-text>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <div class="form-errors" *ngIf="hasError('password', 'required')">
+        <ion-text color="danger">Password is required</ion-text>
+      </div>
+    </ion-item>
+    <ion-button class="submit-button" expand="block" type="submit"
+      >Login</ion-button
+    >
+  </form>
+</ion-content>
+
+<ion-footer>
+  <p>Do not have an account?</p>
+  <ion-button fill="clear" type="button" (click)="register()"
+    >Sign up now!</ion-button
+  >
+</ion-footer>
