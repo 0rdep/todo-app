@@ -42,7 +42,20 @@ export class TodoAddPage implements OnInit {
     return c && (c.touched || c.dirty) && c.hasError(error);
   }
 
+  markFormGroupTouched() {
+    for (const i in this.form.controls) {
+      if (this.form.controls.hasOwnProperty(i)) {
+        const control = this.form.controls[i];
+        control.markAsTouched();
+      }
+    }
+  }
+
   submit() {
+    if (!this.form.valid) {
+      this.markFormGroupTouched();
+      return;
+    }
     this.todoService
       .create(this.form.value)
       .subscribe(() => this.navigateBack());
