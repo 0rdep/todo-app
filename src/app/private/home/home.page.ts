@@ -134,7 +134,7 @@ export class HomePage implements OnInit, ViewWillEnter {
   getTodayTotalTasks() {
     return (
       this.summary &&
-      this.summary.map((s) => s.done).reduce((a, b) => a + b, 0)
+      this.summary.map((s) => s.total - s.done).reduce((a, b) => a + b, 0)
     );
   }
 
