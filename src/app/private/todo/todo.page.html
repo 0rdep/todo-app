@@ -28,7 +28,6 @@
         <ion-item *ngFor="let todo of todosByDay[todoDay]">
           <ion-checkbox
             [checked]="todo.done"
-            [disabled]="todo.done"
             (ionChange)="markDone(todo)"
             slot="start"
           ></ion-checkbox>

@@ -90,9 +90,10 @@ export class TodoPage implements OnInit {
 
   markDone(todo: Todo) {
     if (todo.done) {
-      return;
+      this.todoService.markUndone(todo._id).subscribe(() => this.loadTodos());
+    } else {
+      this.todoService.markDone(todo._id).subscribe(() => this.loadTodos());
     }
-    this.todoService.markDone(todo._id).subscribe(() => this.loadTodos());
   }
 
   gotoCreatePage() {

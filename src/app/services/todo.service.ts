@@ -37,6 +37,10 @@ export class TodoService {
     return this.http.put(`${environment.backendUrl}/todo/${todoId}/done`, {});
   }
 
+  markUndone(todoId: string) {
+    return this.http.put(`${environment.backendUrl}/todo/${todoId}/undone`, {});
+  }
+
   delete(todoId: string) {
     return this.http.delete(`${environment.backendUrl}/todo/${todoId}`);
   }
